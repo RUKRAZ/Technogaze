@@ -5,12 +5,11 @@ import { About } from "./components/About";
 
 import { ContactUs } from "./components/ContactUs";
 import { Landing } from "./components/landing";
-import { Login } from "./components/Login";
+//import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { TopNav } from "./components/TopNavbar";
 import { SideNavDark } from "./components/sideNavDark";
 import {ServicesPage} from "./components/ServicesPage";
-import { Resetpassword } from "./components/resetpassword";
 import {EMS} from "./components/ems.tsx";
 //import {App} from "./components/UserDashboard.js";
 import SmoothScroll from "smooth-scroll";
@@ -29,13 +28,11 @@ const App = () => {
       <TopNav />
       <SideNavDark />
       <Routes>
-      <Route path="/" element={<Landing />} />
+      <Route path="/ems" element={<EMS />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<ServicesPage />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<ContactUs />} />
-        <Route path="/reset-password" element={<Resetpassword />} />
         {/* Add other routes as needed */}
       </Routes>
     </Router>
