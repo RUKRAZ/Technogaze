@@ -1,8 +1,14 @@
 import React from 'react';
 import backgroundImage from './about-us.jpg'; // This is the path to the background image you've provided
 
+
+
+  
+
 export const About = () => {
+  
   return (
+    <>
     <div className="min-h-screen flex items-center justify-center" 
          style={{ 
            backgroundImage: `url(${backgroundImage})`,
@@ -20,7 +26,17 @@ export const About = () => {
         </h2>
       </div>
     </div>
-  );
-};
+
+
+
+
+
+
+
+  
+  </>
+  
+);
+}
 
 export default About;
