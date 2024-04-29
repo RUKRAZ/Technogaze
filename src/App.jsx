@@ -40,10 +40,20 @@ import { ContactSignedIn } from './components/ConctactSignedIn';
 import { AboutSignedIn } from './components/AboutSignedIn';
 import SmoothScroll from "smooth-scroll";
 import "./index.css";
-export const scroll = new SmoothScroll('a[href*="#"]', {
+
+import { Chatbot } from './components/Chatbot.js';
+
+
+
+/*export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
   speedAsDuration: true,
-});
+});*/
+
+
+
+
+
 //page routes:
 
 const App = () => {
@@ -67,32 +77,13 @@ function NavBarLogic() {
     }
 };
 
-/*
-const navigate = useNavigate();
 
-  const handleChatTrigger = (path) => {
-    const navigate = useNavigate();
-    return () => {
-      navigate(path);
-    };
-  };
-  */
+
 
 
 
   return (
     <Router>
-        <NavBarLogic />
-      {isLoggedIn ? (
-                // If logged in, display side navigation bar
-                <>
-                </>
-            ) : (
-                // If logged out, display top navigation bar
-                <>
-                    <TopNav />
-                </>
-            )}
     
       <Routes>
       <Route path="/" element={<Landing />} />
@@ -131,7 +122,7 @@ const navigate = useNavigate();
         {/* Add other routes as needed */}
       </Routes>
       
-
+   
       
 
     </Router>
@@ -139,63 +130,11 @@ const navigate = useNavigate();
   );
 };
 
-export default App;
-
-
-
-/*<ChatBot
-    steps={[
-      {
-        id: '1',
-        message: 'Welcome to Bay Develops, what can we help you with today?',
-        trigger: '2',
-      },
-      {
-        id: '2',
-        options: [
-          { value: 1, label: 'Products', trigger: handleChatTrigger('/services') },
-          { value: 2, label: 'Sign up!', trigger: handleChatTrigger('/register') },
-          { value: 3, label: 'Learn about us', trigger: handleChatTrigger('/about') },
-          { value: 4, label: 'Contact us', trigger: handleChatTrigger('/contact') }
-        ],
-        
-      },
-      {
-        id: '3',
-        message: 'Redirecting...',
-        trigger: () => chatTrigger,
-        waitAction: true,
-      },
-
-    ]}
 
 
 
 
-    <ChatBot
-        steps={[
-          {
-            id: '1',
-            message: 'Welcome to Bay Develops, what can we help you with today?',
-            trigger: '2',
-          },
-          {
-            id: '2',
-            options: [
-              { value: 1, label: 'Products', trigger: handleChatTrigger('/services') },
-              { value: 2, label: 'Sign up!', trigger: handleChatTrigger('/register') },
-              { value: 3, label: 'Learn about us', trigger: handleChatTrigger('/about') },
-              { value: 4, label: 'Contact us', trigger: handleChatTrigger('/contact') }
-            ],
-        
-          },
-          {
-            id: '3',
-            message: 'Redirecting...',
-            trigger: () => handleChatTrigger,
-            waitAction: true,
-          },
 
-        ]}
-      />
-  />*/ 
+
+
+  export default App;
