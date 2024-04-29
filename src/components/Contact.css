@@ -22,3 +22,26 @@
     margin-left: 160px;
     text-underline-offset: 20px;
   }
+  .bgImg{
+    max-width: 200%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+
+  }
+
+  .fullName{
+    color: black;
+  }
+
+  .email{
+    color: black;
+  }
+
+  .message{
+    color: black;
+  }
+
+  .messageHeader{
+    color: white;
+  }

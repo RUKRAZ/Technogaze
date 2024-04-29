@@ -8,6 +8,7 @@ CREATE TABLE User (
 CREATE TABLE Transaction (
     transaction_id SERIAL PRIMARY KEY,
     user_id INT,
+    product_id SERIAL UNIQUE,
     product_name VARCHAR(100),
     transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES "User"(user_id)

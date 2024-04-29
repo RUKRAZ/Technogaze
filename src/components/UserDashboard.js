@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link component from react-router-dom
 import './UserDashboard.css';
 import {
   ChakraProvider,
@@ -9,13 +10,14 @@ import {
   Heading,
   Card,
   Spacer,
+  Button,
 } from '@chakra-ui/react';
 
 
 import BigChartBox from "./emsFiles/bigChartBox/BigChartBox.tsx";
 import ChartBox from "./emsFiles/chartBox/ChartBox.tsx";
 import TopBox from "./emsFiles/topBox/TopBox.tsx";
-import SideNavDark from "./sideNavDark.js"
+import SideNavDark from "./sideNavDark.js";
 import {
   barChartBoxRevenue,
   barChartBoxVisit,
@@ -29,6 +31,7 @@ import "./emsFiles/ems.scss";
 export const UserDash = () => {
   return (
     <ChakraProvider>
+      <SideNavDark />
         <div class="row">
             <div class="column">
                     <Container mt={3} position='relative' right='500' >
@@ -101,6 +104,13 @@ export const UserDash = () => {
                 <Spacer />
                 </Flex>
                 </Box>
+                </Container>
+
+                {/* Add Link to Services Page */}
+                <Container mt={5} position='relative' right='500'>
+                  <Link to="/services">
+                    <Button colorScheme="blue" variant="solid">View Products</Button>
+                  </Link>
                 </Container>
             </div>
         </div>

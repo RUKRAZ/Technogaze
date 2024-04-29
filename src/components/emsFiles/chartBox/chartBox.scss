@@ -21,10 +21,11 @@
     .title {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      color: white;
 
       @include xxl{
-        font-size: 14px;
+        font-size: 18px;
       }
     }
 
@@ -48,21 +49,20 @@
 
     .texts {
       display: flex;
+      position: relative;
       flex-direction: column;
-      text-align: right;
+      text-align: left;
 
       .percentage {
         font-weight: bold;
         font-size: 20px;
 
         @include xxl{
-          font-size: 16px;
+          font-size: 18px;
         }
       }
 
-      .duration{
-        font-size: 14px;
-      }
+
     }
   }
 }

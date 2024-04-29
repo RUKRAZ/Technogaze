@@ -9,6 +9,7 @@ module.exports = {
         "greyscale-100": "#f1f5f9",
         "greyscale-500": "#64748b",
         "secondary-glamour-pink-500-base": "#ed4f9d",
+        "pink": "FA6360",
         "greyscale-50": "#f8fafc",
         royalblue: "#2563eb",
         gray: {

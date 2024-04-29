@@ -13,6 +13,11 @@ export const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setErrorMessage(''); // Clear previous error messages
+    if (!email || !password) {
+      setErrorMessage('Please provide both email and password.');
+      return;
+    }
     try {
       const response = await axios.post('http://localhost:8080/post_login', {
         email,
@@ -25,12 +30,20 @@ export const Login = () => {
         console.log('Login successful:', response.data);
         // Store the token in sessionStorage
         //sessionStorage.setItem('token', response.data.token);
-        navigate('/services'); 
+        navigate('/user-dashboard'); 
       } else {
           // Handle the case where login is successful but no token is received
           setErrorMessage('Login was successful, but no token was received.');
         } 
     } catch (error) {
+      const errorResponse = error.response;
+      if (errorResponse && errorResponse.status === 400) {
+        setErrorMessage('Login failed. Please check your email or password'); 
+      } else if (errorResponse && errorResponse.status === 500) {
+        setErrorMessage('Server error, please try again later.');
+      } else {
+        setErrorMessage('Login failed. Please check your email or password');
+      }
       console.error('Login failed:', error.response || error);
     }
   };
@@ -39,10 +52,10 @@ export const Login = () => {
     <div className="flex flex-row h-screen bg-gray-100">
       {/* Logo Section */}
       <div className="flex w-1/2 bg-gray-100 justify-center items-center">
-        <div className="text-center">
+        <div className="text-center text-white">
           <img src="./img/baydevelopslogo.svg" alt="Company Logo" className="mx-auto"/>
           <h1 className="m-0 relative font-bold mt-4 justify-end">Network Infrastructure Solutions</h1>
-          <p className="text-white mt-4">Everything you need in an one dashboard.</p>
+          <p className="mt-4">Everything you need in an one dashboard.</p>
         </div>
       </div>
 
@@ -50,6 +63,11 @@ export const Login = () => {
       <div className="flex w-1/2 justify-center items-center bg-white p-12">
         <div className="max-w-fit w-full">
           <h2 className="text-3xl font-bold mb-2">Sign In to your Account</h2>
+          {errorMessage && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+              {errorMessage}
+            </div>
+          )}
           <form className="mt-8 space-y-6" onSubmit={handleLogin}>
             <div>
               <label htmlFor="email" className="sr-only">Email address</label>
@@ -94,11 +112,17 @@ export const Login = () => {
              <button type="sub" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Sign in
               </button>
+              
             </div>
           </form>
           <Link to="/register" className="mt-4 inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
-          New user? Register here
-        </Link>
+            New user? Register here
+          </Link>
+          <div>
+          <Link to="/employee_login" className="mt-4 inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+            Employee? Login Here
+          </Link>
+          </div>
         </div>
       </div>
     </div>
