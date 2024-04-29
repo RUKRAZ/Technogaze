@@ -27,15 +27,14 @@ import { AppDevServicePage } from "./components/AppDevServicePage";
 import { SoftwareDevServicePage } from "./components/SoftwareDevServicePage";
 import SmoothScroll from "smooth-scroll";
 import "./index.css";
-
-import { Chatbot } from './components/Chatbot.js';
-
+import ChatBot from 'react-simple-chatbot';
 
 
-/*export const scroll = new SmoothScroll('a[href*="#"]', {
+
+export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
   speedAsDuration: true,
-});*/
+});
 
 
 
@@ -65,12 +64,19 @@ function NavBarLogic() {
 };
 
 
+const navigate = useNavigate();
 
+  const handleChatTrigger = (path) => {
+    return () => {
+      navigate(path);
+    };
+  };
 
 
 
   return (
     <Router>
+        <Navigation />
     
       <Routes>
       <Route path="/" element={<Landing />} />
@@ -97,8 +103,33 @@ function NavBarLogic() {
         <Route path="/ems" element={<EMS />} />
         {/* Add other routes as needed */}
       </Routes>
-      
-   
+      <ChatBot
+        steps={[
+          {
+            id: '1',
+            message: 'Welcome to Bay Develops, what can we help you with today?',
+            trigger: '2',
+          },
+          {
+            id: '2',
+            options: [
+              { value: 1, label: 'Products', trigger: handleChatTrigger('/services') },
+              { value: 2, label: 'Sign up!', trigger: handleChatTrigger('/register') },
+              { value: 3, label: 'Learn about us', trigger: handleChatTrigger('/about') },
+              { value: 4, label: 'Contact us', trigger: handleChatTrigger('/contact') }
+            ],
+        
+          },
+          {
+            id: '3',
+            message: 'Redirecting...',
+            trigger: () => handleChatTrigger,
+            waitAction: true,
+          },
+
+        ]}
+      />
+
       
 
     </Router>
@@ -107,10 +138,56 @@ function NavBarLogic() {
 };
 
 
+const Navigation = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const loggedInPaths = ['/services', '/ems'];
+    const loggedOutPath = ['/login'];
+
+    setIsLoggedIn(loggedInPaths.includes(location.pathname));
+  }, [location.pathname]);
+
+  const handleChatTrigger = (path) => {
+    navigate(path);
+  };
+
+  return (
+    <>
+      {isLoggedIn ? <SideNavDark /> : <TopNav />}
+    </>
+  );
+};
+
+export default App;
 
 
 
+/*<ChatBot
+    steps={[
+      {
+        id: '1',
+        message: 'Welcome to Bay Develops, what can we help you with today?',
+        trigger: '2',
+      },
+      {
+        id: '2',
+        options: [
+          { value: 1, label: 'Products', trigger: handleChatTrigger('/services') },
+          { value: 2, label: 'Sign up!', trigger: handleChatTrigger('/register') },
+          { value: 3, label: 'Learn about us', trigger: handleChatTrigger('/about') },
+          { value: 4, label: 'Contact us', trigger: handleChatTrigger('/contact') }
+        ],
+        
+      },
+      {
+        id: '3',
+        message: 'Redirecting...',
+        trigger: () => chatTrigger,
+        waitAction: true,
+      },
 
-
-
-  export default App;
+    ]}
+  />*/ 

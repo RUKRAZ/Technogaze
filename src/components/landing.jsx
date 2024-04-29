@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { Link } from 'react-router-dom';
-import { Chatbot } from "./Chatbot"
 
 export const Landing = (props) => {
   return (
@@ -30,8 +29,6 @@ export const Landing = (props) => {
                     Get Started
                 </Button>
                 </div>
-
-
                 <div>
                 <Button
                     sx={{ width: 204, height: 72, mx: 2, fontSize: 20 }}
@@ -44,13 +41,8 @@ export const Landing = (props) => {
                     Learn More
                 </Button>
                 </div>
-
             </div>
-
         </div>
-    <Chatbot/>
-
-
 
     </div>
     <div class="footer">
