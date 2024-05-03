@@ -1,45 +1,50 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# Start a new browser session
-driver = webdriver.Chrome()  # Or use another browser like Firefox or Edge
+# Set up the WebDriver
+driver = webdriver.Chrome()  # or use Firefox(), Edge(), etc.
 
-# Open the payment page URL
-driver.get("http://localhost:3000/paymentPage")
+# Define the URL of the page to test
+url = "http://localhost:3000/path-to-your-react-app"
 
-# Fill in credit card details
-driver.find_element(By.ID, "name").send_keys("John Doe")
-driver.find_element(By.ID, "card").send_keys("1234 5678 9012 3456")
-select_month = Select(driver.find_element(By.ID, "month-select"))
-select_month.select_by_visible_text("May")  # Example month
-select_year = Select(driver.find_element(By.ID, "year-select"))
-select_year.select_by_visible_text("2027")  # Example year
-driver.find_element(By.ID, "code").send_keys("123")
+# Navigate to the specified URL
+driver.get(url)
 
-# Fill in billing address
-driver.find_element(By.ID, "country").send_keys("United States")
-select_country = Select(driver.find_element(By.ID, "country-select"))
-select_country.select_by_visible_text("United States")
-driver.find_element(By.ID, "adress").send_keys("123 Elm Street")
-driver.find_element(By.ID, "city").send_keys("Anytown")
-driver.find_element(By.ID, "state").send_keys("CA")
-driver.find_element(By.ID, "zip").send_keys("90210")
-
-# Fill in contact information
-driver.find_element(By.ID, "email").send_keys("john.doe@example.com")
-
-# Submit the form
-driver.find_element(By.CLASS_NAME, "btn").click()
-
-# Wait for a response page to load (if applicable)
+# Allow some time for the page to load completely
 time.sleep(5)
 
-# Verify that the form was submitted (e.g., by checking the URL or page content)
-# This part will depend on the specific behavior of the application after form submission.
+# Fill out the form
+driver.find_element(By.ID, "name").send_keys("John Doe")
+driver.find_element(By.ID, "cardNumber").send_keys("4111 1111 1111 1111")  # Example Visa test card number
+select_month = Select(driver.find_element(By.ID, "month"))
+select_month.select_by_visible_text("05")  # May
+select_year = Select(driver.find_element(By.ID, "year"))
+select_year.select_by_visible_text("2027")  # Example year
+driver.find_element(By.ID, "code").send_keys("123")  # CVV
+driver.find_element(By.ID, "email").send_keys("test@example.com")
 
-# Close the browser session
+# Submit the form
+submit_button = driver.find_element(By.XPATH, "//button[@type='submit']")
+submit_button.click()
+
+# Wait for a response that indicates completion or a new page load, adjust according to your app's behavior
+try:
+    # Example: Wait for an element that confirms the submission
+    element_present = EC.presence_of_element_located((By.ID, 'confirmation_message_id'))
+    WebDriverWait(driver, 10).until(element_present)
+    
+    print("Form submitted and confirmation received.")
+except TimeoutException:
+    print("Timed out waiting for page to load")
+
+# Optionally, assert conditions here to verify successful payment or navigation
+
+# Clean up: close the browser window
 driver.quit()
 
 
