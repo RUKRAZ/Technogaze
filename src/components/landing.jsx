@@ -66,8 +66,8 @@ export const Landing = (props) => {
                 Quick Links
                 <div class="links_text">
                     <Link to="/about" className="[text-decoration:none] relative leading-[24px] text-[inherit]">About Us</Link>
-                    <Link to="/services" className="[text-decoration:none] relative leading-[24px] text-[inherit]">Service</Link>
-                    <Link to="/services" className="[text-decoration:none] relative leading-[24px] text-[inherit]">Pricing</Link>
+                    <Link to="/contact" className="[text-decoration:none] relative leading-[24px] text-[inherit]">Contact Us</Link>
+                    <Link to="/pricing" className="[text-decoration:none] relative leading-[24px] text-[inherit]">Pricing</Link>
                 </div>
             </div>
             <div class="flex_item3">

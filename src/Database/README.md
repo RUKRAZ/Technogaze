@@ -5,6 +5,11 @@ user = 'postgres_user'
 password = 'admin123'
 REGION = us-east-2c
 
+(windods)
+
+
+
+(Mac User)
 PLEASE INTALL HOMEBREW BEFORE PROCEEDING FURTHER
 
 How to install Postgresql in terminal?

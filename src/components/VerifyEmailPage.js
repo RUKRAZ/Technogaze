@@ -1,95 +1,109 @@
 // Content is another file that holds all the code to provide most of this page its elements
 
 import { useState } from "react";
-import { Link } from 'react-router-dom';
-import { TextField, Button} from "@mui/material";
+import { Link, navigate, useNavigate } from 'react-router-dom';
+import { TextField, Button, Snackbar} from "@mui/material";
 import axios from 'axios'; 
 
 export const VerifyEmailPage = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const navigate = useNavigate();
 
   const handleSendCode = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
+    if (!email) {
+      setMessage("Please enter your email address.");
+      setOpenSnackbar(true);
+      return;
+    }
     try {
       const response = await axios.post('http://localhost:8080/api/send-verification-code', { email });
       setMessage("If your email is in our database, you will receive a code to reset your password.");
+      setOpenSnackbar(true);
+      navigate("/reset-password"); // Navigate only after successful post
     } catch (error) {
       console.error('Error sending verification code:', error);
       setMessage("Failed to send verification code. Please try again.");
+      setOpenSnackbar(true);
     }
   };
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
   return (
-    <div className="w-full relative bg-additional-white overflow-hidden flex flex-row items-start justify-start pt-0 px-0 pb-[82px] box-border gap-[41px] tracking-[normal] mq700:gap-[41px] mq925:flex-wrap">
-      <div className="h-[346px] w-[437px] flex flex-col items-start justify-end py-0 px-0 box-border min-w-[437px] max-w-full mq700:min-w-full mq925:flex-1">
-        <img
-          className="w-[500px] h-[500px] relative object-cover shrink-0 max-w-[114%] mq925:self-stretch mq925:w-auto"
-          alt=""
-          src="./img/bayDevelopsLogo(black).png"
-        />
-      </div>
-      <div className="w-[484px] flex flex-col items-start justify-start pt-[82px] px-0 pb-0 box-border min-w-[484px] max-w-full mq700:min-w-full mq450:pt-[34px] mq450:box-border mq925:flex-1 mq925:pt-[53px] mq925:box-border">
-        <form onSubmit = {handleSendCode} className="m-0 self-stretch rounded-2xl bg-additional-white flex flex-col items-center justify-center p-10 gap-[32px] mq700:gap-[32px] mq925:pt-[26px] mq925:pb-[26px] mq925:box-border">
+    <div className="flex items-center justify-center min-h-screen bg-additional-white">
+      <div className="w-full max-w-lg p-4 bg-white shadow-md rounded-md">
+        <form onSubmit={handleSendCode} className="flex flex-col items-center p-10 gap-6">
           <img
-            className="w-[151.6px] h-[132px] relative"
+            className="w-40 h-32"
             loading="eager"
-            alt=""
+            alt="Vector girl"
             src="./img/Vector-girl.svg"
           />
-          <div className="self-stretch flex flex-col items-center justify-start gap-[12px]">
-            <h3 className="m-0 self-stretch relative text-5xl tracking-[0.2px] leading-[125%] font-bold font-body-medium-regular text-greyscale-900 text-center mq450:text-lgi mq450:leading-[24px]">
+          <div className="text-center">
+            <h3 className="text-3xl font-bold text-greyscale-900">
               Verify your Email
             </h3>
-            <h6 className="m-0 self-stretch relative text-sm leading-[160%] font-normal font-body-medium-regular text-greyscale-500 text-center">
+            <h6 className="text-sm font-normal text-greyscale-500">
               Enter the email address associated with your account and we will send you a code to reset your password.
             </h6>
           </div>
           <TextField
-            className="[border:none] bg-[transparent] self-stretch h-14 font-body-medium-regular text-base text-lightslategray"
+            label="Enter Email Address"
             placeholder="Enter your Email"
             variant="outlined"
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            fullWidth
             InputProps={{
               startAdornment: (
-                <img width="24px" height="24px" src="./img/mailicon.svg" />
+                <img width="24px" height="24px" src="./img/mailicon.svg" alt="Mail Icon" />
               ),
             }}
             sx={{
               "& fieldset": { borderColor: "#e2e8f0" },
               "& .MuiInputBase-root": {
                 height: "56px",
-                paddingLeft: "16px",
                 borderRadius: "12px",
               },
-              "& .MuiInputBase-input": { paddingLeft: "12px", color: "#94a3b8" },
+              "& .MuiInputBase-input": { color: "#94a3b8" },
             }}
           />
           <Button
-            className="self-stretch h-14"
-            type = "submit"
-            disableElevation={true}
+            type="submit"
+            disableElevation
             variant="contained"
             sx={{
               textTransform: "none",
               color: "#fff",
-              fontSize: "16",
               background: "#141416",
               borderRadius: "12px",
               "&:hover": { background: "#141416" },
+              width: '100%',  // Make the button full width of the form
               height: 56,
             }}
           >
             Continue
           </Button>
-          <a className="[text-decoration:none] relative text-sm leading-[160%] text-center">
-            <Link to="/login" className="[text-decoration:none] relative leading-[24px] text-[inherit]">Back to Sign In</Link>
-          </a>
-          <a className="[text-decoration:none] relative text-sm leading-[160%] text-center">
-            <span className="font-body-medium-regular text-greyscale-900">
-              Don't have an account?
-            </span>
-            <Link to="/register" className="[text-decoration:none] relative leading-[24px] text-[inherit]"> Sign Up</Link>
-          </a>
+          <Snackbar
+            open={openSnackbar}
+            autoHideDuration={6000}
+            onClose={handleCloseSnackbar}
+            message={message}
+          />
+          <Link to="/login" className="text-sm">
+            Back to Sign In
+          </Link>
+          <div className="text-sm text-center">
+            Don't have an account? 
+            <Link to="/register" className="ml-1">Sign Up</Link>
+          </div>
         </form>
       </div>
     </div>

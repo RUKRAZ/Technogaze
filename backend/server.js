@@ -60,8 +60,47 @@ pool.query(`
         }
     });
 
-app.get('/protected', auth, (req, res) => {
-    res.json({ message: "Welcome to the protected route!", user: req.user });
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Route handler to insert a new task into the database (dashboard)
+app.post('/api/dashboard', async (req, res) => {
+    const { todo } = req.body;
+    try {
+        await pool.query('INSERT INTO dashboard (todo) VALUES ($1)', [todo]);
+        console.log('Todo inserted successfully');
+        res.status(201).send('Todo inserted successfully');
+        await pool.query('INSERT INTO dashboard (todo) VALUES ($1)', [todo]);
+        console.log('Todo inserted successfully');
+        res.status(201).send('Todo inserted successfully');
+    } catch (err) {
+        console.error('Error inserting todo:', err);
+        res.status(500).send('Error inserting todo');
+        console.error('Error inserting todo:', err);
+        res.status(500).send('Error inserting todo');
+    }
+});
+
+// Route handler to remove a todo item by text
+app.delete('/api/dashboard/:todo', async (req, res) => {
+});
+
+// Route handler to remove a todo item by text
+app.delete('/api/dashboard/:todo', async (req, res) => {
+    const { todo } = req.params;
+    try {
+        await pool.query('DELETE FROM dashboard WHERE todo = $1', [todo]);
+        console.log('Todo removed successfully');
+        res.send('Todo removed successfully');
+        await pool.query('DELETE FROM dashboard WHERE todo = $1', [todo]);
+        console.log('Todo removed successfully');
+        res.send('Todo removed successfully');
+    } catch (err) {
+        console.error('Error removing todo:', err);
+        res.status(500).send('Error removing todo');
+        console.error('Error removing todo:', err);
+        res.status(500).send('Error removing todo');
+    }
 });
 
 // Start the server
@@ -284,31 +323,33 @@ const generateCode = () => {
     return crypto.randomBytes(3).toString('hex'); // Generates a 6-character hex string
   };
   
-  // Example usage in an endpoint
-  app.post('/api/send-verification-code', async (req, res) => {
-    const { email } = req.body;
-    const client = await pool.connect();
-    try {
-      const userResult = await client.query('SELECT * FROM users WHERE email = $1', [email]);
-      if (userResult.rows.length === 0) {
-        return res.status(404).send('User not found.');
-      }
-  
-      const code = generateCode();
-      // Here, add the code to a verification_codes table, for example
-      // Make sure to add expiration logic as per your requirements
-  
-      // Assuming sendVerificationEmail sends the email with the code
-      await sendVerificationEmail(email, code); // Implement this function based on your email service
-  
-      res.send('Verification code sent.');
-    } catch (err) {
-      console.error('Error sending verification code:', err);
-      res.status(500).send('An error occurred.');
-    } finally {
-      client.release();
-    }
-  });
+// Email transport configuration
+//const transporter = nodemailer.createTransport({
+  //service: 'gmail', // Example with Gmail; you need to setup your Gmail for allowing less secure apps or use OAuth2
+//  auth: {
+ //   user: 'your-email@gmail.com',
+ //   pass: 'your-password'
+//  }
+//});
+//end point to send verification code.  
+app.post('/api/send-verification-code', async (req, res) => {
+const { email } = req.body;
+const verificationCode = Math.floor(100000 + Math.random() * 900000); // Generates a 6-digit code
+
+try {
+    await transporter.sendMail({
+    from: '"Your Company Name" <your-email@gmail.com>',
+    to: email,
+    subject: 'Your Verification Code',
+    text: `Your verification code is: ${verificationCode}`
+    });
+
+    res.status(200).send('Verification code sent successfully.');
+} catch (error) {
+    console.error('Failed to send email:', error);
+    res.status(500).send('Failed to send verification code.');
+}
+});
 
   app.get('/userdashboard', auth, (req, res) => {
     console.log(req.userId);
@@ -338,6 +379,122 @@ app.delete('/api/dashboard/:todo', async (req, res) => {
     } catch (err) {
         console.error('Error removing todo:', err);
         res.status(500).send('Error removing todo');
+        console.error('Error removing todo:', err);
+        res.status(500).send('Error removing todo');
     }
 });
   
+
+// Route handler for updating the username
+// Route handler for updating the username
+app.post('/update-username', async (req, res) => {
+    try {
+        // Extract current and new usernames from the request body
+        const { currentUsername, newUsername } = req.body;
+
+        // Check if the new username is already taken
+        const usernameExists = await pool.query('SELECT * FROM users WHERE username = $1', [newUsername]);
+        if (usernameExists.rows.length > 0) {
+            return res.status(400).json({ message: 'Username already exists. Please choose a different username.' });
+        }
+
+        // Update the username in the database
+        const updateResult = await pool.query(
+            'UPDATE users SET username = $1 WHERE username = $2',
+            [newUsername, currentUsername]
+        );
+
+        // Check if the update was successful
+        if (updateResult.rowCount === 1) {
+            // Return success message
+            res.status(200).json({ message: 'Username updated successfully' });
+        } else {
+            // If the update affected 0 rows, it means the current username was not found
+            res.status(404).json({ message: 'Current username not found' });
+        }
+    } catch (error) {
+        console.error('Error updating username:', error);
+        res.status(500).json({ message: 'Error updating username' });
+    }
+});
+
+app.post('/update-email', async (req, res) => {
+    try {
+        // Extract current and new emails from the request body
+        const { currentEmail, newEmail } = req.body;
+
+        // Check if the new email is already taken
+        const emailExists = await pool.query('SELECT * FROM users WHERE email = $1', [newEmail]);
+        if (emailExists.rows.length > 0) {
+            return res.status(400).json({ message: 'Email already exists. Please choose a different email.' });
+        }
+
+        // Update the email in the database
+        const updateResult = await pool.query(
+            'UPDATE users SET email = $1 WHERE email = $2',
+            [newEmail, currentEmail]
+        );
+
+        // Check if the update was successful
+        if (updateResult.rowCount === 1) {
+            // Return success message
+            res.status(200).json({ message: 'Email updated successfully' });
+        } else {
+            // If the update affected 0 rows, it means the current email was not found
+            res.status(404).json({ message: 'Current email not found' });
+        }
+    } catch (error) {
+        console.error('Error updating email:', error);
+        res.status(500).json({ message: 'Error updating email' });
+    }
+});
+
+// Route handler to retrieve current projects for a user
+app.get('/api/projects', auth, async (req, res) => {
+    try {
+        // Extract user ID from the authenticated request
+        const userId = req.user.id;
+
+        // Query the database to fetch projects associated with the user
+        const projects = await pool.query('SELECT * FROM projects WHERE user_id = $1', [userId]);
+
+        // If projects are found, return them in the response
+        if (projects.rows.length > 0) {
+            res.status(200).json(projects.rows);
+        } else {
+            // If no projects are found, return a message indicating that
+            res.status(404).json({ message: 'No projects found for the user' });
+        }
+    } catch (error) {
+        console.error('Error retrieving projects:', error);
+        res.status(500).json({ message: 'Error retrieving projects' });
+    }
+});
+
+// Route handler to update projects for a user
+app.put('/api/projects/:projectId', auth, async (req, res) => {
+    try {
+        // Extract user ID and project ID from the request parameters
+        const userId = req.user.id;
+        const projectId = req.params.projectId;
+
+        // Extract updated project data from the request body
+        const { projectName, projectDescription } = req.body;
+
+        // Check if the project exists and belongs to the user
+        const project = await pool.query('SELECT * FROM projects WHERE id = $1 AND user_id = $2', [projectId, userId]);
+        if (project.rows.length === 0) {
+            return res.status(404).json({ message: 'Project not found or does not belong to the user' });
+        }
+
+        // Update the project in the database
+        await pool.query('UPDATE projects SET name = $1, description = $2 WHERE id = $3', [projectName, projectDescription, projectId]);
+
+        // Return success message
+        res.status(200).json({ message: 'Project updated successfully' });
+    } catch (error) {
+        console.error('Error updating project:', error);
+        res.status(500).json({ message: 'Error updating project' });
+    }
+});
+

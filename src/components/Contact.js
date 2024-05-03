@@ -5,30 +5,37 @@ import React from "react";
 
 export const Contact = (props) =>  {
   return (
-    <>
-    <div className='headerTextContact'>
+    <div className='min-h-screen flex items-center justify-center' 
+        style={{ 
+           backgroundImage: `url(${img1})`,
+           backgroundPosition: 'center',
+           backgroundSize: 'cover',
+           backgroundRepeat: 'no-repeat'
+         }}>
       <div class='textOnImageContact'>
       <u>Contact Us</u>
         <p id="descriptionContact">
-            <form action="/action_page.php"> 
+            <form action="https://formsubmit.co/baydevelops@gmail.com" method="Post"> 
                 <label for="name">Enter Name </label>
                 <br></br>
-                <input type="text" id="name" name="name" size="120"></input>
+                <input class="fullName" type="text" name="name" size="60" required></input>
                 <br></br>
                 <label for="email">Enter Email </label>
                 <br></br>
-                <input type="text" id="email" name="email" size="120"></input>
+                <input class="email" type="email" name="email" size="60" required></input>
                 <br></br>
                 <fieldset>
-                    <legend>Message</legend>
-                    <textarea id="textArea" rows="10" cols="122"></textarea>
+                    <legend class="messageHeader">Message</legend>
+                    <textarea class="message" rows="4" cols="62" name="message" required></textarea>
                 </fieldset>
+                <input type="hidden" name="_captcha" value="false"></input>
+                <input type="hidden" name="_next" value="http://localhost:3000/contact"></input>
             <Button
               className="self-stretch"
               id="sendContact"
               color="error"
-              name="Purchse Service"
               size="large"
+              type="submit"
               variant="contained">
               Send
             </Button>
@@ -36,8 +43,7 @@ export const Contact = (props) =>  {
         </p>
       </div>
     </div>
-    <img src={img1} alt="backgroundimg" />
-    </>
+
   );
 }
 

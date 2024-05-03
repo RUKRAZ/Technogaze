@@ -1,25 +1,26 @@
-//backend stuff
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import { Link } from "react-router-dom";
-import "./chartBox.scss";
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 
+interface User {
+  id: number;
+  todo: string;
+}
 
-
-type Props = {
+interface Props {
   color: string;
   icon: string;
   title: string;
   dataKey: string;
   number: number | string;
   percentage: number;
-  chartData: object[];
-};
+  note:string;
+}
 
-const ChartBox = (props:Props) => {
-  const [users, setUsers] = useState([]);
+const ChartBox: React.FC<Props> = (props) => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     // Fetch users from the backend when the component mounts
@@ -29,55 +30,52 @@ const ChartBox = (props:Props) => {
       })
       .catch(error => {
         console.error('Error fetching users:', error);
+        setError('Failed to fetch users');
       });
   }, []); // Empty dependency array ensures the effect runs only once
 
-  return (
-    <div className="chartBox">
-      <div className="boxInfo">
-        <div className="title">
-          <img src={props.icon} alt="" />
-          <span>{props.title}</span>
-        </div>
-        <h1>
-        {/*setUsers.map(dashboard => (
-          <li key={dashboard.id}>{dashboard.todo}</li>
-        ))*/}
+  const renderUsers = () => {
+    return users.map(user => (
+      <li key={user.id}>{user.todo}</li>
+    ));
+  };
 
-        </h1>
-        <Link to="/" style={{ color: props.color }}>
-          View all
-        </Link>
-      </div>
-      <div className="chartInfo">
-        <div className="chart">
-          <ResponsiveContainer width="99%" height="100%">
-            <LineChart data={props.chartData}>
-              <Tooltip
-                contentStyle={{ background: "transparent", border: "none" }}
-                labelStyle={{ display: "none" }}
-                position={{ x: 10, y: 70 }}
-              />
-              <Line
-                type="monotone"
-                dataKey={props.dataKey}
-                stroke={props.color}
-                strokeWidth={2}
-                dot={false}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+  const getStatusColor = () => {
+    return props.percentage < 50 ? "tomato" : "limegreen";
+  };
+
+  return (
+    <div>
+      <div className="chartBox" style={{ color: 'white', fontSize: '18px' }}>
+        <div className="boxInfo">
+          <div className="title">
+            <img src={props.icon} alt="" />
+            <span>{props.title}</span>
+          </div>
+          <h1>
+            {/* Render users */}
+            {renderUsers()}
+          </h1>
         </div>
         <div className="texts">
+        Status: 
           <span
             className="percentage"
-            style={{ color: props.percentage < 0 ? "tomato" : "limegreen" }}
+            style={{ color: getStatusColor() }}
           >
-            {props.percentage}%
+             {" " +props.dataKey}
           </span>
-          <span className="duration">this month</span>
         </div>
       </div>
+      <br/>
+      <div style={{ color: "white" }}>
+        Manager: {props.number}
+      </div>
+      <br/>
+      <div style={{ color: "white" }}>
+        Notes: {props.note}
+      </div>
+      
     </div>
   );
 };

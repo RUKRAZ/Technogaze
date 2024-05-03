@@ -36,6 +36,7 @@ export const EmployeeRegister = () => {
         const data = await response.json();
         if (response.ok) {
           console.log('Registration successful:', data);
+          alert('Registration successful! You will now be redirected to the login page.');
           navigate('/employee_login'); // Redirects to login page
         } else {
           setError(data.message || 'Registration failed. Please try again.');
