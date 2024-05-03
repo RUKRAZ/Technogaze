@@ -40,19 +40,15 @@ import { ContactSignedIn } from './components/ConctactSignedIn';
 import { AboutSignedIn } from './components/AboutSignedIn';
 import SmoothScroll from "smooth-scroll";
 import "./index.css";
-
 import { Chatbot } from './components/Chatbot.js';
-
-import { Chatbot } from './components/Chatbot.js';
-
-
 
 /*export const scroll = new SmoothScroll('a[href*="#"]', {
 /*export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
   speedAsDuration: true,
 });*/
-});*/
+
+
 
 
 
@@ -125,6 +121,7 @@ function NavBarLogic() {
         <Route path="/about-signedin" element={<AboutSignedIn />} />
         {/* Add other routes as needed */}
       </Routes>
+      <ChatBot/>
       
    
       
@@ -149,5 +146,3 @@ function NavBarLogic() {
 
 
 
-
-  export default App;
