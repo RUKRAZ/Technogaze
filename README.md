@@ -49,8 +49,6 @@ OpenAI: For custom chatbot.
 
 ## Testing
 
-## Deployment
-
 ## Developer Instructions
 
 Here is a tutorial on how to get the repo onto your local machine as well as pushing and pulling.
