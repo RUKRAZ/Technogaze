@@ -170,3 +170,67 @@ performance. The database is designed to efficiently scale with increasing data 
 2. When the employee creates a project it gets saved to the Project table.
 3. When a user purchases a product the “Recommended Products” section of the user dashboard and the “Clients” section of the employee dashboard must be updated. The transaction information gets saved in the Transaction table. The corresponding product icon will be removed from the “Recommended Products” tab and the client information along with what product they bought will be displayed in the “Clients” tab.
 
+## Deployment:
+
+1. **GitHub Account**: Vercel integrates seamlessly with GitHub (as well as GitLab and Bitbucket). Ensure your project code is in a repository on one of these platforms.
+2. **Vercel Account**: Create an account on Vercel if you don't already have one.
+3. **AWS Account**: Since your database is hosted on AWS, you need access to your AWS account to manage database credentials and configurations.
+4. **Local Development Environment**: Make sure your application is fully functional locally before attempting to deploy.
+
+### Step 1: Prepare Your Project
+
+#### Backend Setup
+
+1. **Create a Node.js API**:
+   - Ensure your Node.js application handles requests and responses correctly.
+   - Test it locally to make sure everything works as expected.
+
+2. **Environment Variables**:
+   - Move configuration such as database connection strings to environment variables. Use a `.env` file locally, and Vercel will allow you to configure them in their dashboard.
+
+#### Frontend Setup
+
+1. **Build Your React Application**:
+   - Ensure that your React app is set up to proxy API requests to the backend. During development, this might be configured to target `localhost`, but for production, it should target the deployed backend URL.
+
+### Step 2: Set Up AWS Database
+
+1. **Configure Your Database**:
+   - Set up your AWS database (e.g., RDS for relational databases or DynamoDB for NoSQL).
+   - Ensure that the database is accessible from your deployment environment. This may involve configuring security groups and access rules in AWS to allow connections from Vercel's IP addresses.
+
+2. **Secure Database Access**:
+   - Never expose your database directly to the internet. Ensure it's only accessible from your backend application.
+   - Manage your database credentials securely using AWS IAM roles and policies.
+
+#### Connect Your Repository
+
+1. **Log into Vercel**:
+   - Go to Vercel and log in.
+   - Connect your GitHub/GitLab/Bitbucket repository to Vercel. This can be done from the Vercel dashboard by creating a new project and linking it to your repository.
+
+#### Configure Project
+
+1. **Environment Variables**:
+   - Set up the necessary environment variables in Vercel's settings for your project. This includes database connection details and any other secrets or keys.
+
+2. **Build Commands and Output Directory**:
+   - Configure the build settings in Vercel:
+     - **Build Command**: This might be something like `npm run build` for your React app and `npm run start` for your Node.js backend if you're using something like Next.js.
+     - **Output Directory**: Typically `build` for Create React App projects.
+
+  **Push Your Code**:
+   - Push the latest code to your connected repository. Vercel automatically detects this push and starts the deployment process.
+   - You can monitor the deployment progress directly on your Vercel dashboard.
+
+### Step 4: Post-Deployment
+
+1. **Verify Deployment**:
+   - Once deployed, visit the provided URL by Vercel to check if the React application loads correctly.
+   - Test the connectivity between your frontend, backend, and database to ensure everything is communicating as expected.
+
+2. **Setup Domain**:
+   - If you own a domain, you can configure it in Vercel to point to your new deployment for a professional URL.
+
+3. **Monitor & Scale**:
+   - Vercel provides analytics and monitoring tools. Keep an eye on performance and scale up resources as needed.
