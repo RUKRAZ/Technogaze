@@ -60,8 +60,7 @@ Step 3: Now that you have the link open up your command prompt and change the di
 Step 4: type in this command git clone https://github.com/RUKRAZ/Technogaze.git
 Step 5: Now you have the project on your local machine.
 Step 6: Download and Install GitHub Desktop this will allow for updating your branch and push to the main without having to use the command prompt
-Step 7: Sign into GituHub Desktop and then open your repo. Choose the branch you would like to work on and then open it in your IDE make changes come back to the Github Desktop and it will say would you like to push. You click that then you will make a pull request to the main branch now you are all done
-## Key Milestones
+Step 7: Sign into GituHub Desktop and then open your repo. Choose the branch you would like to work on and then open it in your IDE make changes come back to the Github Desktop and it will say would you like to push. You click that then you will make a pull request to the main branch now you are all done.
 
 ## UI/UX
 
