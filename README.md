@@ -2,7 +2,12 @@
 
 ## Background
 
-Team Technogaze was formed by the students of California State University - Sacramento to develop infrastructure solutions for Bay Develops and to complete their Senior Project requirements. This team is led by Indraneel Bhattacharjee and consists of 7 more team members who are engineers, developers, and UI/UX Designers.
+Team Technogaze was formed by a group of students at California State University - Sacramento for th purpose of developing infrastructure solutions for Bay Develops and to complete their Senior Project requirements. This team is led by Indraneel Bhattacharjee and consists of 7 more team members who are engineers, developers, and UI/UX Designers. Over the course of this project the Technogaze team developed a full service interactive website in order to fulfill the business needs of Bay Develops. The website includes an interactive user experience that enables browsing of secuirty and IT products, an elegant landing page, seemless integration of transaction/purchase functionality, and an interactive chatbot that can enable optimal user experience. 
+
+
+
+
+![logo](https://github.com/RUKRAZ/Technogaze/blob/main/public/img/bayDevelopsLogo(black).png)
 
 ## Team information
 
