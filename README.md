@@ -24,16 +24,13 @@ Repository for CSC 191 - Infrastructure Development for Bay Develops
 
 ## Install
 To rebuild the project, run the following commands in order:
-* Make sure `node` is in your path.
+* Make sure `node` is in your path (verson 14.x, 16.x or 18.x).
 * `git clone https://github.com/RUKRAZ/Technogaze.git` - latest version on GitHub
-* `npm install --global yarn` - installing the package manager
-* `yarn add --save react react-dom @types/react @types/react-dom` -install dependencies
-* `npm update react-icons` - install icons for social media platforms
+* `npm install --force` - install required dependencies
 
 ## Configuration
-To run using yarn, input the following commands in order:
-*`yarn`
-*`yarn start `
+To run on localhost, input the following commands in order:
+*`npm start`
 
 ## Usage
 
@@ -44,8 +41,6 @@ Once the webpage is running, point your browser to http://localhost:3000 to acce
 StripeAPI: For payment.
 
 Auth0: For user authentication.
-
-OpenAI: For custom chatbot. 
 
 ## Testing
 Team Technogaze is dedicated to ensuring the robustness and efficiency of Bay Develops' web application through a comprehensive testing strategy. This strategy incorporates the use of Selenium, Jest, Postman, and Pytest to thoroughly examine each layer of the application, from frontend user interactions to backend API functionality and database integrity.
@@ -106,7 +101,7 @@ Here is a tutorial on how to get the repo onto your local machine as well as pus
 Step 1: Go to our main repo on github here is the link. https://github.com/RUKRAZ/Technogaze
 Step 2: Click on code and drop down menu will apear. Leave it on the HTTPS tab and copy that url.
 Step 3: Now that you have the link open up your command prompt and change the directiory to where you would like the project to be.
-Step 4: type in this command git clone https://github.com/RUKRAZ/Technogaze.git
+Step 4: type in this command: git clone https://github.com/RUKRAZ/Technogaze.git
 Step 5: Now you have the project on your local machine.
 Step 6: Download and Install GitHub Desktop this will allow for updating your branch and push to the main without having to use the command prompt
 Step 7: Sign into GituHub Desktop and then open your repo. Choose the branch you would like to work on and then open it in your IDE make changes come back to the Github Desktop and it will say would you like to push. You click that then you will make a pull request to the main branch now you are all done.
