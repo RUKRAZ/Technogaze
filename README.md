@@ -50,6 +50,55 @@ OpenAI: For custom chatbot.
 ## Testing
 Team Technogaze is dedicated to ensuring the robustness and efficiency of Bay Develops' web application through a comprehensive testing strategy. This strategy incorporates the use of Selenium, Jest, Postman, and Pytest to thoroughly examine each layer of the application, from frontend user interactions to backend API functionality and database integrity.
 
+Selenium for FrontEnd Testing
+
+Overview:
+Our team employs Selenium to simulate real-world user interactions with the Bay Develops web application. This tool enables us to validate the visual and functional aspects of the frontend across various browsers and platforms, ensuring a consistent and flawless user experience. Note that some front-end tests were done manually instead of using Selenium and some were done with Jest to help certain team members who struggled with Selenium.
+
+Testing Strategy:
+Functional Testing: We automate navigation, form submissions, and clicks to validate each frontend function.
+CrossBrowser Testing: We verify that the application performs consistently across Chrome, Firefox, Safari, and Edge.
+Regression Testing: Each new release is rigorously tested to ensure that enhancements or bug fixes do not adversely affect existing functionalities.
+Responsive Testing: We ensure that the web application is responsive and functions well on various devices including tablets and smartphones.
+
+Tools and Technologies:
+Selenium WebDriver: Manages browser interactions programmatically.
+Selenium Grid: Facilitates parallel testing across different environments.
+Test Management Tools: We integrate with frameworks like JUnit and TestNG to organize tests and generate insightful reports.
+
+Postman for BackEnd Testing
+
+Overview:
+Postman is our tool of choice for testing the API layer of Bay Develops' web application. It allows us to ensure that all server responses are accurate under normal and edge case conditions, contributing to the application's reliability and security.
+
+Testing Strategy:
+API Validation: We test all API endpoints for correct status codes, response times, and data accuracy.
+Security Testing: We validate authentication and authorization for all endpoints to prevent unauthorized access.
+Load Testing: We simulate high traffic to evaluate API performance and stability.
+Integration Testing: We check integration points between the API and other services, including third party integrations, to ensure seamless data flow and functionality.
+
+Tools and Technologies:
+Postman Workspaces: Facilitates team collaboration on API testing.
+Newman: Allows us to run Postman collections directly within our continuous integration pipelines.
+
+Pytest for Database Testing
+
+Overview:
+Team Technogaze utilizes Pytest for comprehensive database testing, focusing on the integrity and performance of the data layer within the Bay Develops web application. This ensures that all data handling by the application is secure and efficient.
+
+Testing Strategy:
+Unit Testing: We perform tests on individual database functions and stored procedures.
+Data Consistency and Integrity Testing: We validate data manipulation operations for accuracy and reliability.
+Performance Testing: We assess the database performance under varying loads to ensure responsiveness under stress.
+Migration Testing: Critical during schema updates, we ensure that migrations do not affect the integrity or performance of the existing data.
+
+Tools and Technologies:
+Database Interfaces: We use Postgresql for crafting database queries within our tests.
+CI/CD Integration: Pytest is integrated into our development pipeline to automatically run database tests during code commits and merges.
+
+Integration of Testing Tools for Comprehensive Assurance:
+By integrating Selenium, Postman, and Pytest, Team Technogaze ensures that every component of the Bay Develops web application, from frontend to backend and the underlying database, is thoroughly tested. This holistic approach to testing guarantees that the application not only meets our high standards for user experience and functionality but also remains scalable, secure, and robust against future challenges.
+
 ## Developer Instructions
 
 Here is a tutorial on how to get the repo onto your local machine as well as pushing and pulling.
