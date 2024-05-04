@@ -48,6 +48,7 @@ Auth0: For user authentication.
 OpenAI: For custom chatbot. 
 
 ## Testing
+Team Technogaze is dedicated to ensuring the robustness and efficiency of Bay Develops' web application through a comprehensive testing strategy. This strategy incorporates the use of Selenium, Jest, Postman, and Pytest to thoroughly examine each layer of the application, from frontend user interactions to backend API functionality and database integrity.
 
 ## Developer Instructions
 
