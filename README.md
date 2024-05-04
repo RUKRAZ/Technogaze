@@ -29,7 +29,7 @@ To rebuild the project, run the following commands in order:
 * `npm install --force` - install required dependencies
 
 ## Configuration
-To run on localhost, input the following commands in order:
+To run on localhost, input the following command:
 *`npm start`
 
 ## Usage
