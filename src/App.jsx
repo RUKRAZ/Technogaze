@@ -26,7 +26,7 @@ import { AppDevServicePage } from "./components/AppDevServicePage";
 import { SoftwareDevServicePage } from "./components/SoftwareDevServicePage";
 import { PricingPage } from "./components/PricingPage";
 import { CreditCardForm } from "./components/paymentPage";
-import ChatBot from 'react-simple-chatbot';
+//import ChatBot from 'react-simple-chatbot';
 import { SideNav } from './components/updatesSidenav.jsx';
 import { EmployeeContact } from './components/employee_contact';
 import { EmployeeServicesPage } from './components/employee_services';
@@ -84,7 +84,17 @@ function NavBarLogic() {
 
   return (
     <Router>
-    
+    <NavBarLogic />
+      {isLoggedIn ? (
+                // If logged in, display side navigation bar
+                <>
+                </>
+            ) : (
+                // If logged out, display top navigation bar
+                <>
+                    <TopNav />
+                </>
+            )}
       <Routes>
       <Route path="/" element={<Landing />} />
         <Route path="/about" element={<About />} />
@@ -121,8 +131,8 @@ function NavBarLogic() {
         <Route path="/about-signedin" element={<AboutSignedIn />} />
         {/* Add other routes as needed */}
       </Routes>
-      <ChatBot/>
-      
+    
+      <Chatbot/>
    
       
    
