@@ -18,7 +18,7 @@ import { ProfilePage } from "./components/ProfilePage";
 import {ServicesPage} from "./components/ServicesPage";
 import { ResetPassword } from "./components/resetpassword";
 import { VerifyEmailPage } from "./components/VerifyEmailPage";
-import {EMS} from "./components/ems.tsx";
+import {EMS} from "./components/ems.jsx";
 import {UserDash} from "./components/UserDashboard.js";
 import { UIUXDevServicePage } from "./components/UIUXDevServicePage";
 import { WebDevServicePage } from "./components/WebDevServicePage";

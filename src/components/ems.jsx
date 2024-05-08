@@ -7,7 +7,7 @@ import { chartBoxConversion, chartBoxProduct, chartBoxUser } from "./emsFiles/da
 import { SideNavDark } from "./sideNavDark";
 
 import "./emsFiles/ems.scss";
-export const UserDash = () => {
+export const EMS = () => {
   return (
     <div className="home">
       <div className="box1">
@@ -61,7 +61,7 @@ export const UserDash = () => {
   );
 };
 
-export default UserDash;
+export default EMS;
 /*
 
     */

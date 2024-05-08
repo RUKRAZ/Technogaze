@@ -3,17 +3,29 @@ import "./topBox.scss"
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const ProjType = Object.freeze({ 
+  NETWORKINFRASTRUCTURE: 0, 
+  WEBDEV: 1, 
+  SOFTDEV: 2, 
+  APPDEV: 3, 
+  UIUXDEV: 4, 
+  CUSTOM:5 
+});
+
 interface Todo {
   id: number;
   todo: string;
+
 }
 
 const TopBox = () => {
+  const baseURL = "https://jsonplaceholder.typicode.com/posts";
+
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const addItemToDatabase = async (text: string): Promise<void> => {
     try {
-      const response = await fetch('/api/dashboard', {
+      const response = await fetch('/api/dashboard/todo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ item: text })
@@ -40,7 +52,7 @@ const TopBox = () => {
   };
 
   useEffect(() => {
-    axios.get('/api/dashboard')
+    axios.get('/api/dashboard/todo')
       .then(response => setTodos(response.data))
       .catch(error => console.error('Error fetching todos:', error));
   }, []);
@@ -48,9 +60,8 @@ const TopBox = () => {
   return (
     <div className="topBox">
       <h1>To Do</h1>
-      <textarea id="freeform" name="to-do-textbox" cols={40} rows={5}>
-        Enter your to-do list for your projects...
-      </textarea>
+      <textarea name="to-do-textbox" color="neutral" defaultValue="Enter task here" cols={40} rows={5} />
+        
       <br />
       <Button sx={{ width: 100, height: 35, mt: 2, fontSize: 10 }}
         color="error" name="Add Task" variant="contained"
@@ -63,9 +74,13 @@ const TopBox = () => {
         Delete Task
       </Button>
       <div className="list">
+        <p></p>
         {todos.map(todo => (
           <li key={todo.id}>{todo.todo}</li>
         ))}
+        <li>Task 1</li>
+        <li>Task 2</li>
+        <li>Task 3</li>
       </div>
     </div>
   );
