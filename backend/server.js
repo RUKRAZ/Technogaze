@@ -64,26 +64,18 @@ pool.query(`
 app.use(express.json());
 
 // Route handler to insert a new task into the database (dashboard)
-app.post('/api/dashboard', async (req, res) => {
+app.post('/api/dashboard/todo', async (req, res) => {
     const { todo } = req.body;
     try {
-        await pool.query('INSERT INTO dashboard (todo) VALUES ($1)', [todo]);
-        console.log('Todo inserted successfully');
-        res.status(201).send('Todo inserted successfully');
         await pool.query('INSERT INTO dashboard (todo) VALUES ($1)', [todo]);
         console.log('Todo inserted successfully');
         res.status(201).send('Todo inserted successfully');
     } catch (err) {
         console.error('Error inserting todo:', err);
         res.status(500).send('Error inserting todo');
-        console.error('Error inserting todo:', err);
-        res.status(500).send('Error inserting todo');
     }
 });
 
-// Route handler to remove a todo item by text
-app.delete('/api/dashboard/:todo', async (req, res) => {
-});
 
 // Route handler to remove a todo item by text
 app.delete('/api/dashboard/:todo', async (req, res) => {
@@ -92,12 +84,7 @@ app.delete('/api/dashboard/:todo', async (req, res) => {
         await pool.query('DELETE FROM dashboard WHERE todo = $1', [todo]);
         console.log('Todo removed successfully');
         res.send('Todo removed successfully');
-        await pool.query('DELETE FROM dashboard WHERE todo = $1', [todo]);
-        console.log('Todo removed successfully');
-        res.send('Todo removed successfully');
     } catch (err) {
-        console.error('Error removing todo:', err);
-        res.status(500).send('Error removing todo');
         console.error('Error removing todo:', err);
         res.status(500).send('Error removing todo');
     }

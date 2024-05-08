@@ -18,7 +18,7 @@ import { ProfilePage } from "./components/ProfilePage";
 import {ServicesPage} from "./components/ServicesPage";
 import { ResetPassword } from "./components/resetpassword";
 import { VerifyEmailPage } from "./components/VerifyEmailPage";
-import {EMS} from "./components/ems.tsx";
+import {EMS} from "./components/ems.jsx";
 import {UserDash} from "./components/UserDashboard.js";
 import { UIUXDevServicePage } from "./components/UIUXDevServicePage";
 import { WebDevServicePage } from "./components/WebDevServicePage";
@@ -26,7 +26,7 @@ import { AppDevServicePage } from "./components/AppDevServicePage";
 import { SoftwareDevServicePage } from "./components/SoftwareDevServicePage";
 import { PricingPage } from "./components/PricingPage";
 import { CreditCardForm } from "./components/paymentPage";
-import ChatBot from 'react-simple-chatbot';
+//import ChatBot from 'react-simple-chatbot';
 import { SideNav } from './components/updatesSidenav.jsx';
 import { EmployeeContact } from './components/employee_contact';
 import { EmployeeServicesPage } from './components/employee_services';
@@ -40,15 +40,15 @@ import { ContactSignedIn } from './components/ConctactSignedIn';
 import { AboutSignedIn } from './components/AboutSignedIn';
 import SmoothScroll from "smooth-scroll";
 import "./index.css";
-
 import { Chatbot } from './components/Chatbot.js';
 
-
-
+/*export const scroll = new SmoothScroll('a[href*="#"]', {
 /*export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
   speedAsDuration: true,
 });*/
+
+
 
 
 
@@ -84,7 +84,7 @@ function NavBarLogic() {
 
   return (
     <Router>
-      <NavBarLogic />
+    <NavBarLogic />
       {isLoggedIn ? (
                 // If logged in, display side navigation bar
                 <>
@@ -131,6 +131,9 @@ function NavBarLogic() {
         <Route path="/about-signedin" element={<AboutSignedIn />} />
         {/* Add other routes as needed */}
       </Routes>
+    
+      <Chatbot/>
+   
       
    
       
@@ -148,3 +151,8 @@ function NavBarLogic() {
 
 
   export default App;
+
+
+
+
+

@@ -2,7 +2,12 @@
 
 ## Background
 
-Team Technogaze was formed by the students of California State University - Sacramento to develop infrastructure solutions for Bay Develops and to complete their Senior Project requirements. This team is led by Indraneel Bhattacharjee and consists of 7 more team members who are engineers, developers, and UI/UX Designers.
+Team Technogaze was formed by a group of students at California State University - Sacramento for the purpose of developing infrastructure solutions for Bay Develops and to complete their Senior Project requirements. This team is led by Indraneel Bhattacharjee and consists of 7 more team members who are engineers, developers, and UI/UX Designers. Over the course of this project the Technogaze team developed a full service interactive website in order to fulfill the business needs of Bay Develops. The website includes an interactive user experience that enables browsing of secuirty and IT products, an elegant landing page, seemless integration of transaction/purchase functionality, and an interactive chatbot that can enable optimal user experience. 
+
+
+
+
+![logo](https://github.com/RUKRAZ/Technogaze/blob/main/public/img/bayDevelopsLogo(black).png)
 
 ## Team information
 
@@ -19,16 +24,13 @@ Repository for CSC 191 - Infrastructure Development for Bay Develops
 
 ## Install
 To rebuild the project, run the following commands in order:
-* Make sure `node` is in your path.
+* Make sure `node` is in your path (verson 14.x, 16.x or 18.x).
 * `git clone https://github.com/RUKRAZ/Technogaze.git` - latest version on GitHub
-* `npm install --global yarn` - installing the package manager
-* `yarn add --save react react-dom @types/react @types/react-dom` -install dependencies
-* `npm update react-icons` - install icons for social media platforms
+* `npm install --force` - install required dependencies
 
 ## Configuration
-To run using yarn, input the following commands in order:
-*`yarn`
-*`yarn start `
+To run on localhost, input the following command:
+*`npm start`
 
 ## Usage
 
@@ -40,11 +42,57 @@ StripeAPI: For payment.
 
 Auth0: For user authentication.
 
-OpenAI: For custom chatbot. 
-
 ## Testing
+Team Technogaze is dedicated to ensuring the robustness and efficiency of Bay Develops' web application through a comprehensive testing strategy. This strategy incorporates the use of Selenium, Jest, Postman, and Pytest to thoroughly examine each layer of the application, from frontend user interactions to backend API functionality and database integrity.
 
-## Deployment
+Selenium for FrontEnd Testing
+
+Overview:
+Our team employs Selenium to simulate real-world user interactions with the Bay Develops web application. This tool enables us to validate the visual and functional aspects of the frontend across various browsers and platforms, ensuring a consistent and flawless user experience. Note that some front-end tests were done manually instead of using Selenium and some were done with Jest to help certain team members who struggled with Selenium.
+
+Testing Strategy:
+Functional Testing: We automate navigation, form submissions, and clicks to validate each frontend function.
+CrossBrowser Testing: We verify that the application performs consistently across Chrome, Firefox, Safari, and Edge.
+Regression Testing: Each new release is rigorously tested to ensure that enhancements or bug fixes do not adversely affect existing functionalities.
+Responsive Testing: We ensure that the web application is responsive and functions well on various devices including tablets and smartphones.
+
+Tools and Technologies:
+Selenium WebDriver: Manages browser interactions programmatically.
+Selenium Grid: Facilitates parallel testing across different environments.
+Test Management Tools: We integrate with frameworks like JUnit and TestNG to organize tests and generate insightful reports.
+
+Postman for BackEnd Testing
+
+Overview:
+Postman is our tool of choice for testing the API layer of Bay Develops' web application. It allows us to ensure that all server responses are accurate under normal and edge case conditions, contributing to the application's reliability and security.
+
+Testing Strategy:
+API Validation: We test all API endpoints for correct status codes, response times, and data accuracy.
+Security Testing: We validate authentication and authorization for all endpoints to prevent unauthorized access.
+Load Testing: We simulate high traffic to evaluate API performance and stability.
+Integration Testing: We check integration points between the API and other services, including third party integrations, to ensure seamless data flow and functionality.
+
+Tools and Technologies:
+Postman Workspaces: Facilitates team collaboration on API testing.
+Newman: Allows us to run Postman collections directly within our continuous integration pipelines.
+
+Pytest for Database Testing
+
+Overview:
+Team Technogaze utilizes Pytest for comprehensive database testing, focusing on the integrity and performance of the data layer within the Bay Develops web application. This ensures that all data handling by the application is secure and efficient.
+
+Testing Strategy:
+Unit Testing: We perform tests on individual database functions and stored procedures.
+Data Consistency and Integrity Testing: We validate data manipulation operations for accuracy and reliability.
+Performance Testing: We assess the database performance under varying loads to ensure responsiveness under stress.
+Migration Testing: Critical during schema updates, we ensure that migrations do not affect the integrity or performance of the existing data.
+
+Tools and Technologies:
+Database Interfaces: We use Postgresql for crafting database queries within our tests.
+CI/CD Integration: Pytest is integrated into our development pipeline to automatically run database tests during code commits and merges.
+
+Integration of Testing Tools for Comprehensive Assurance:
+By integrating Selenium, Postman, and Pytest, Team Technogaze ensures that every component of the Bay Develops web application, from frontend to backend and the underlying database, is thoroughly tested. This holistic approach to testing guarantees that the application not only meets our high standards for user experience and functionality but also remains scalable, secure, and robust against future challenges.
 
 ## Developer Instructions
 
@@ -53,7 +101,7 @@ Here is a tutorial on how to get the repo onto your local machine as well as pus
 Step 1: Go to our main repo on github here is the link. https://github.com/RUKRAZ/Technogaze
 Step 2: Click on code and drop down menu will apear. Leave it on the HTTPS tab and copy that url.
 Step 3: Now that you have the link open up your command prompt and change the directiory to where you would like the project to be.
-Step 4: type in this command git clone https://github.com/RUKRAZ/Technogaze.git
+Step 4: type in this command: git clone https://github.com/RUKRAZ/Technogaze.git
 Step 5: Now you have the project on your local machine.
 Step 6: Download and Install GitHub Desktop this will allow for updating your branch and push to the main without having to use the command prompt
 Step 7: Sign into GituHub Desktop and then open your repo. Choose the branch you would like to work on and then open it in your IDE make changes come back to the Github Desktop and it will say would you like to push. You click that then you will make a pull request to the main branch now you are all done.
@@ -170,3 +218,67 @@ performance. The database is designed to efficiently scale with increasing data 
 2. When the employee creates a project it gets saved to the Project table.
 3. When a user purchases a product the “Recommended Products” section of the user dashboard and the “Clients” section of the employee dashboard must be updated. The transaction information gets saved in the Transaction table. The corresponding product icon will be removed from the “Recommended Products” tab and the client information along with what product they bought will be displayed in the “Clients” tab.
 
+## Deployment:
+
+1. **GitHub Account**: Vercel integrates seamlessly with GitHub (as well as GitLab and Bitbucket). Ensure your project code is in a repository on one of these platforms.
+2. **Vercel Account**: Create an account on Vercel if you don't already have one.
+3. **AWS Account**: Since your database is hosted on AWS, you need access to your AWS account to manage database credentials and configurations.
+4. **Local Development Environment**: Make sure your application is fully functional locally before attempting to deploy.
+
+### Step 1: Prepare Your Project
+
+#### Backend Setup
+
+1. **Create a Node.js API**:
+   - Ensure your Node.js application handles requests and responses correctly.
+   - Test it locally to make sure everything works as expected.
+
+2. **Environment Variables**:
+   - Move configuration such as database connection strings to environment variables. Use a `.env` file locally, and Vercel will allow you to configure them in their dashboard.
+
+#### Frontend Setup
+
+1. **Build Your React Application**:
+   - Ensure that your React app is set up to proxy API requests to the backend. During development, this might be configured to target `localhost`, but for production, it should target the deployed backend URL.
+
+### Step 2: Set Up AWS Database
+
+1. **Configure Your Database**:
+   - Set up your AWS database (e.g., RDS for relational databases or DynamoDB for NoSQL).
+   - Ensure that the database is accessible from your deployment environment. This may involve configuring security groups and access rules in AWS to allow connections from Vercel's IP addresses.
+
+2. **Secure Database Access**:
+   - Never expose your database directly to the internet. Ensure it's only accessible from your backend application.
+   - Manage your database credentials securely using AWS IAM roles and policies.
+
+#### Connect Your Repository
+
+1. **Log into Vercel**:
+   - Go to Vercel and log in.
+   - Connect your GitHub/GitLab/Bitbucket repository to Vercel. This can be done from the Vercel dashboard by creating a new project and linking it to your repository.
+
+#### Configure Project
+
+1. **Environment Variables**:
+   - Set up the necessary environment variables in Vercel's settings for your project. This includes database connection details and any other secrets or keys.
+
+2. **Build Commands and Output Directory**:
+   - Configure the build settings in Vercel:
+     - **Build Command**: This might be something like `npm run build` for your React app and `npm run start` for your Node.js backend if you're using something like Next.js.
+     - **Output Directory**: Typically `build` for Create React App projects.
+
+  **Push Your Code**:
+   - Push the latest code to your connected repository. Vercel automatically detects this push and starts the deployment process.
+   - You can monitor the deployment progress directly on your Vercel dashboard.
+
+### Step 4: Post-Deployment
+
+1. **Verify Deployment**:
+   - Once deployed, visit the provided URL by Vercel to check if the React application loads correctly.
+   - Test the connectivity between your frontend, backend, and database to ensure everything is communicating as expected.
+
+2. **Setup Domain**:
+   - If you own a domain, you can configure it in Vercel to point to your new deployment for a professional URL.
+
+3. **Monitor & Scale**:
+   - Vercel provides analytics and monitoring tools. Keep an eye on performance and scale up resources as needed.

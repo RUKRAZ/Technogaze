@@ -24,9 +24,9 @@ export const chartBoxConversion = {
   color: "teal",
   icon: "/revenueIcon.svg",
   title: "Proj. Name",
-  number: "Jhon, D.",
+  number: "wil, D.",
   dataKey: "Not Started",
-  percentage: 20,
+  percentage: 49,
   note: "Insert Note Here"
 };
 

@@ -1,0 +1,16 @@
+{
+    "rewrites": [
+      { "source": "/(.*)", "destination": "/index.html" }
+    ],
+    "build": {
+        "env": {
+          "CUSTOM_ENV_VARIABLE": "value"
+        },
+        "commands": {
+          "install": "npm install",
+          "build": "npm run build"
+        }
+      }
+  }
+  
+ 
