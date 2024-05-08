@@ -18,7 +18,7 @@ import { ProfilePage } from "./components/ProfilePage";
 import {ServicesPage} from "./components/ServicesPage";
 import { ResetPassword } from "./components/resetpassword";
 import { VerifyEmailPage } from "./components/VerifyEmailPage";
-import {EMS} from "./components/ems.jsx";
+import {EMS} from "./components/ems";
 import {UserDash} from "./components/UserDashboard.js";
 import { UIUXDevServicePage } from "./components/UIUXDevServicePage";
 import { WebDevServicePage } from "./components/WebDevServicePage";
@@ -76,12 +76,6 @@ function NavBarLogic() {
         setIsLoggedIn(false);
     }
 };
-
-
-
-
-
-
   return (
     <Router>
     <NavBarLogic />
@@ -131,28 +125,10 @@ function NavBarLogic() {
         <Route path="/about-signedin" element={<AboutSignedIn />} />
         {/* Add other routes as needed */}
       </Routes>
-    
       <Chatbot/>
-   
-      
-   
-      
-
     </Router>
 
   );
 };
 
-
-
-
-
-
-
-
-  export default App;
-
-
-
-
-
+export default App;

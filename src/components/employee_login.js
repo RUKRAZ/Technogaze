@@ -14,6 +14,10 @@ export const EmployeeLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage(''); // Clear previous error messages
+    if (!email || !password) {
+      setErrorMessage('Please provide both email and password.');
+      return;
+    }
     try {
       const response = await axios.post('http://localhost:8080/employee_login', {
         email,
@@ -70,7 +74,6 @@ export const EmployeeLogin = () => {
                 id="email" 
                 name="email" 
                 type="email" 
-                required 
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" 
                 placeholder="Email address"
                 value={email}
@@ -83,7 +86,6 @@ export const EmployeeLogin = () => {
                 id="password" 
                 name="password" 
                 type="password" 
-                required 
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" 
                 placeholder="Password"
                 value={password}

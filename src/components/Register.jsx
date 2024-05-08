@@ -9,15 +9,46 @@ export const Register = () => {
   const [error, setError] = useState(''); // State for error messages
   const navigate = useNavigate();
 
+  const validatePassword = (password) => {
+    const errors = [];
+  
+    if (password.length < 8) {
+      errors.push("Password must be at least 8 characters long.");
+    }
+  
+    if (!/[a-z]/.test(password)) {
+      errors.push("Password must contain at least one lowercase letter.");
+    }
+  
+    if (!/[A-Z]/.test(password)) {
+      errors.push("Password must contain at least one uppercase letter.");
+    }
+  
+    if (!/[0-9]/.test(password)) {
+      errors.push("Password must contain at least one number.");
+    }
+  
+    return errors;
+  }
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setError(''); // Clear any existing error messages
-
+    if (!email || !username || !password || !confirmPassword) {
+      setError('Please provide all the fields');
+      return;
+    }
     // Check if passwords match
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
       return; // Stop the registration process
+    }
+
+    // Validate password strength
+    const passwordErrors = validatePassword(password);
+    if (passwordErrors.length > 0) {
+      setError(passwordErrors.join("\n"));
+      return;
     }
   
     try {
@@ -73,7 +104,6 @@ export const Register = () => {
                 id="username" 
                 name="username" 
                 type="text" 
-                required 
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-t-md"
                 placeholder="Username"
                 value={username}
@@ -86,7 +116,6 @@ export const Register = () => {
                 id="email" 
                 name="email" 
                 type="email" 
-                required 
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-t-md"
                 placeholder="Email address"
                 value={email}
@@ -99,7 +128,6 @@ export const Register = () => {
                 id="password" 
                 name="password" 
                 type="password" 
-                required 
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Password"
                 value={password}
@@ -112,7 +140,6 @@ export const Register = () => {
                 id="confirm-password" 
                 name="confirm-password" 
                 type="password" 
-                required 
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Confirm Password"
                 value={confirmPassword}

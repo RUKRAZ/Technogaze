@@ -13,11 +13,26 @@ export const VerifyEmailPage = () => {
 
   const handleSendCode = async (e) => {
     e.preventDefault(); 
+
     if (!email) {
       setMessage("Please enter your email address.");
       setOpenSnackbar(true);
       return;
     }
+
+    //temporary
+    try{
+      const response = await axios.post('http://localhost:8080/api/verify-email', { email });
+      alert('You will receive a code in your email to reset your password.');
+      navigate("/reset-password"); // Navigate only after successful post
+    } catch (error) {
+      console.error('Error sending verification code:', error);
+      setMessage("Failed to send verification code. Please try again.");
+      setOpenSnackbar(true);
+    }
+    }
+
+    /*
     try {
       const response = await axios.post('http://localhost:8080/api/send-verification-code', { email });
       setMessage("If your email is in our database, you will receive a code to reset your password.");
@@ -29,6 +44,7 @@ export const VerifyEmailPage = () => {
       setOpenSnackbar(true);
     }
   };
+  */
   const handleCloseSnackbar = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -54,6 +70,7 @@ export const VerifyEmailPage = () => {
             </h6>
           </div>
           <TextField
+            id= "email"
             label="Enter Email Address"
             placeholder="Enter your Email"
             variant="outlined"

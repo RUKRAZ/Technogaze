@@ -9,19 +9,49 @@ export const EmployeeRegister = () => {
   const [error, setError] = useState(''); // State for error messages
   const navigate = useNavigate();
 
+  const validatePassword = (password) => {
+    const errors = [];
+  
+    if (password.length < 8) {
+      errors.push("Password must be at least 8 characters long.");
+    }
+  
+    if (!/[a-z]/.test(password)) {
+      errors.push("Password must contain at least one lowercase letter.");
+    }
+  
+    if (!/[A-Z]/.test(password)) {
+      errors.push("Password must contain at least one uppercase letter.");
+    }
+  
+    if (!/[0-9]/.test(password)) {
+      errors.push("Password must contain at least one number.");
+    }
+  
+    return errors;
+  }
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setError(''); // Clear any existing error messages
-
+    if (!email || !password || !confirmPassword) {
+      setError('Please provide all the fields');
+      return;
+    }
     // Check if passwords match
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
       return; // Stop the registration process
     }
-  
+    // Validate password strength
+    const passwordErrors = validatePassword(password);
+    if (passwordErrors.length > 0) {
+      setError(passwordErrors.join("\n"));
+      return;
+    }
+
     try {
-      const response = await fetch('http://localhost:8080/employee_register', {
+      const response = await fetch('https://localhost:8080/employee_register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,8 +101,7 @@ export const EmployeeRegister = () => {
               <input 
                 id="email" 
                 name="email" 
-                type="email" 
-                required 
+                type="email"  
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-t-md"
                 placeholder="Email address"
                 value={email}
@@ -85,7 +114,6 @@ export const EmployeeRegister = () => {
                 id="password" 
                 name="password" 
                 type="password" 
-                required 
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Password"
                 value={password}
@@ -98,7 +126,6 @@ export const EmployeeRegister = () => {
                 id="confirm-password" 
                 name="confirm-password" 
                 type="password" 
-                required 
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Confirm Password"
                 value={confirmPassword}
